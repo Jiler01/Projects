@@ -12,9 +12,10 @@ class Tir:
         px.rect(self.x, self.y, self.w, self.h,10) #x,y,w,h,col
 
 class Vaisseau:
-    def __init__(self):
+    def __init__(self,rate=7):
         self.x , self.y = 60,100
         self.w, self.h = 8,8
+        self.rate = rate
         
         self.tirs = []
 
@@ -27,7 +28,7 @@ class Vaisseau:
             self.y += 1
         if px.btn(px.KEY_UP) and self.y>0:
             self.y += -1
-        if px.btn(px.KEY_SPACE) and px.frame_count % 7 == 0:
+        if px.btn(px.KEY_SPACE) and px.frame_count % self.rate == 0:
             self.tirs.append(Tir(self.x+4,self.y-4))
         for tir in self.tirs:
             tir.update()

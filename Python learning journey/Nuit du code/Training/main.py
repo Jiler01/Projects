@@ -4,25 +4,26 @@ from enemi import Enemi
 from collide import collide
 
 class App:
-    def __init__(self):
+    def __init__(self,fps=60):
         self.vaisseau = Vaisseau()
         self.enemis = []
         self.score = 0
+        self.s = fps
 
-        px.init(128, 128, title="My Fist App")
+        px.init(128, 128, title="My Fist App",fps=fps)
         px.run(self.update, self.draw)
 
     def update(self):
         self.vaisseau.update()
-        if px.frame_count % 300 == 0:
+        if px.frame_count % self.s*3 == 0:
+            self.enemis.append(Enemi(0.25))
+        if px.frame_count % self.s*10 == 0:
             self.enemis.append(Enemi(0.5))
-        if px.frame_count % 1000 == 0:
-            self.enemis.append(Enemi(1))
 
         for enemi in self.enemis:
             if collide(enemi, self.vaisseau):
-                px.quit()
                 print(self.score)
+                px.quit()
                 exit()
             for tir in self.vaisseau.tirs:      
                 if collide(tir, enemi):
@@ -38,4 +39,4 @@ class App:
         for enemi in self.enemis:
             enemi.draw()
 
-App()
+App(fps=30)
