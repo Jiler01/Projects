@@ -10,7 +10,7 @@ class Enemi:
         self.alive = True
 
     def draw(self):
-        px.rect(self.x,self.y,self.w,self.h,7)
+        px.rect(self.x,self.y,self.w,self.h,px.COLOR_PEACH)
 
     def update(self):
         self.y += self.speed
