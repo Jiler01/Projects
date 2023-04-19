@@ -1,5 +1,4 @@
-from pickle import FALSE, TRUE
-from random import randint, random
+from random import randint
 
 #Initialisation des valeurs
 ndv = "Note de version : error(input) == crash == reset TwT"
@@ -36,10 +35,10 @@ class ennemi:
         self.poison = poison
         self.poison_deg = poison_deg
 
-gobelinfaible = ennemi("Un Gobelin faible",10,FALSE,0,5,10,FALSE,"coup de massue","petite potion")
-gobelin = ennemi("Un Gobelin banal",15,FALSE,0,10,15,FALSE,"coup de massue","petite potion")
-gobelinfort = ennemi("Un Gobelin fort",20,FALSE,0,15,20,FALSE,"coup de massue","petite potion")
-gobelindelabo = ennemi("Un Gobelin de labo",15,TRUE,10,20,10,FALSE,"Flêchette empoisonnée","Antidote")
+gobelinfaible = ennemi("Un Gobelin faible",10,False,0,5,10,False,"coup de massue","petite potion")
+gobelin = ennemi("Un Gobelin banal",15,False,0,10,15,False,"coup de massue","petite potion")
+gobelinfort = ennemi("Un Gobelin fort",20,False,0,15,20,False,"coup de massue","petite potion")
+gobelindelabo = ennemi("Un Gobelin de labo",15,True,10,20,10,False,"Flêchette empoisonnée","Antidote")
 
 #/!\-----------------en cas d'ajout d'adversaire : update sync function and ennemis list
 
@@ -70,9 +69,9 @@ class classe:
         self.parade = parade
         self.poisoned = poisoned
 
-Chevalier = classe(10, 2, 10, 0, 10, 10, FALSE, FALSE)
-Assassin = classe(4, 10, 6, 2, 10, 10, FALSE ,FALSE)
-Mage = classe(2, 6, 4, 10, 10, 10, FALSE ,FALSE)
+Chevalier = classe(10, 2, 10, 0, 10, 10, False, False)
+Assassin = classe(4, 10, 6, 2, 10, 10, False ,False)
+Mage = classe(2, 6, 4, 10, 10, 10, False ,False)
 
 
 
@@ -83,9 +82,9 @@ def sync():
     global Assassin
     global Mage
     global moi
-    Chevalier = classe(10, 2, 10, 0, 10, 10, FALSE, FALSE)
-    Assassin = classe(4, 10, 6, 2, 10, 10, FALSE ,FALSE)
-    Mage = classe(2, 6, 4, 10, 10, 10, FALSE ,FALSE)
+    Chevalier = classe(10, 2, 10, 0, 10, 10, False, False)
+    Assassin = classe(4, 10, 6, 2, 10, 10, False ,False)
+    Mage = classe(2, 6, 4, 10, 10, 10, False ,False)
     if moi.num_classe == 1 :
         moi.clas = Chevalier
     elif moi.num_classe == 2 :
@@ -97,10 +96,10 @@ def sync():
     global gobelin
     global gobelinfort
     global gobelindelabo
-    gobelinfaible = ennemi("Un Gobelin faible",10,FALSE,0,5,10,FALSE,"coup de massue","petite potion")
-    gobelin = ennemi("Un Gobelin banal",15,FALSE,0,10,15,FALSE,"coup de massue","petite potion")
-    gobelinfort = ennemi("Un Gobelin fort",20,FALSE,0,15,20,FALSE,"coup de massue","petite potion")
-    gobelindelabo = ennemi("Un Gobelin de labo",15,TRUE,10,20,10,FALSE,"Flêchette empoisonnée","Antidote")
+    gobelinfaible = ennemi("Un Gobelin faible",10,False,0,5,10,False,"coup de massue","petite potion")
+    gobelin = ennemi("Un Gobelin banal",15,False,0,10,15,False,"coup de massue","petite potion")
+    gobelinfort = ennemi("Un Gobelin fort",20,False,0,15,20,False,"coup de massue","petite potion")
+    gobelindelabo = ennemi("Un Gobelin de labo",15,True,10,20,10,False,"Flêchette empoisonnée","Antidote")
 
 
 
@@ -175,18 +174,18 @@ stats()
 #---Encore de nouvelles variables et fonctions---
 
 #Création des Attaques
-Coup_droit = att("Coup droit", moi.clas.force*1,0,0, 2, 0, FALSE, FALSE)
-Coup_puissant = att("Coup puissant",moi.clas.force*5, 0,0, 12, 0, FALSE, FALSE)
-Bouclier = att("Bouclier preque parfait",0, 0,0, (20/moi.clas.force), 0, FALSE, TRUE)
+Coup_droit = att("Coup droit", moi.clas.force*1,0,0, 2, 0, False, False)
+Coup_puissant = att("Coup puissant",moi.clas.force*5, 0,0, 12, 0, False, False)
+Bouclier = att("Bouclier preque parfait",0, 0,0, (20/moi.clas.force), 0, False, True)
 
-Lancé = att("Lancé de dagues",moi.clas.agi*1, 0, 0,5, 0, FALSE, FALSE)
-Lancé_empoisonné = att("Lancé empoisonné",moi.clas.agi*5, 0,0, 20, 0, TRUE, FALSE)
-HealP = att("Potion de soin du maitre des poisons",0, moi.clas.agi ,moi.clas.agi, 0, 0, FALSE, FALSE)
+Lancé = att("Lancé de dagues",moi.clas.agi*1, 0, 0,5, 0, False, False)
+Lancé_empoisonné = att("Lancé empoisonné",moi.clas.agi*5, 0,0, 20, 0, True, False)
+HealP = att("Potion de soin du maitre des poisons",0, moi.clas.agi ,moi.clas.agi, 0, 0, False, False)
 
-Fireball = att("Boule de feu",moi.clas.magie*1 , 0,0,3, 0, FALSE, FALSE)
-Firestorm = att("Tempête de feu",moi.clas.magie*5, 0,0, 17, 0, FALSE, FALSE)
-Blood_Sacrifice = att("Sacrifice de sang",moi.clas.pv*moi.clas.magie*0.1, 0,0, 40, moi.clas.pv/2, FALSE, FALSE)
-Healmag = att("Sort de soin",0,moi.clas.magie,moi.clas.magie,0,0,FALSE,0)
+Fireball = att("Boule de feu",moi.clas.magie*1 , 0,0,3, 0, False, False)
+Firestorm = att("Tempête de feu",moi.clas.magie*5, 0,0, 17, 0, False, False)
+Blood_Sacrifice = att("Sacrifice de sang",moi.clas.pv*moi.clas.magie*0.1, 0,0, 40, moi.clas.pv/2, False, False)
+Healmag = att("Sort de soin",0,moi.clas.magie,moi.clas.magie,0,0,False,0)
 
 Attaques = [Coup_droit,Coup_puissant,Bouclier,Lancé,Lancé_empoisonné,HealP,Fireball,Firestorm,Blood_Sacrifice,Healmag]
 
@@ -211,7 +210,7 @@ def combat(opp):
              print(counter+1,")",Attaques[counter].nom)
             choice = int(input(">>> Je choisis: (un chiffre)"))
 
-            if opponent.poisoned == TRUE:
+            if opponent.poisoned == True:
                 opponent.pv = opponent.pv - moi.clas.magie
             opponent.pv = opponent.pv - Attaques[choice-1].deg
             opponent.poisoned = Attaques[choice-1].poison
@@ -224,13 +223,13 @@ def combat(opp):
         elif tour == 1:
             attorheal = randint(0,1)
             # Choix si att ou heal
-            if moi.clas.poisoned == TRUE:
+            if moi.clas.poisoned == True:
                 moi.clas.pv = moi.clas.pv - opponent.poison_deg
             if attorheal == 0:
                 print("Votre avdversaire utilise :",opponent.att_nom)
-                if moi.clas.poisoned == TRUE:
+                if moi.clas.poisoned == True:
                     moi.clas.pv = moi.clas.pv - opponent.poison_deg
-                if moi.clas.parade == FALSE:
+                if moi.clas.parade == False:
                     moi.clas.pv = moi.clas.pv - opponent.force
                     moi.clas.poisoned = opponent.poison
                 else :
@@ -243,7 +242,7 @@ def combat(opp):
     if moi.clas.pv < 0 or moi.clas.endu < 0:
         print("\nVous avez perdu...")
     if opponent.pv < 0:
-        print("\nVous avez gagné !!!/nVous passez au niveau",n+1,"!!!")
+        print("\nVous avez gagné !!!\nVous passez au niveau",n+1,"!!!")
         niveau_suivant()
     sync()
 
