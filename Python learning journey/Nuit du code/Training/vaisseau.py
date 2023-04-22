@@ -9,7 +9,7 @@ class Tir:
         self.y += -2
 
     def draw(self):
-        px.rect(self.x, self.y, self.w, self.h,10) #x,y,w,h,col
+        px.blt(self.x, self.y, 0, 0, 0, 1, 4, px.COLOR_BLACK) #x,y,w,h,col
 
 class Vaisseau:
     def __init__(self,rate=7,vies=1):
@@ -35,7 +35,7 @@ class Vaisseau:
             tir.update()
     
     def draw(self):
-         px.rect(self.x, self.y, self.w, self.h, 1) #x,y,w,h,col
+         px.blt(self.x, self.y, 0, 8, 0, 8, 8, px.COLOR_BLACK) #x,y,w,h,col
          for tir in self.tirs:
              tir.draw()
              if tir.y < 0:
