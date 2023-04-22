@@ -8,7 +8,6 @@ class App:
     def __init__(self,fps=60,window_size:dict={"x":128 ,"y":128}):
         self.f = open("bestscore.dat","r")
         self.bestscore = int(self.f.readline())
-        print(self.bestscore)
         self.vaisseau = Vaisseau(vies=3)
         self.enemis = []
         self.explosions = []
