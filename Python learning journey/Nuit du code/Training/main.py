@@ -28,7 +28,7 @@ class App:
                 if explosion.update():
                     self.explosions.remove(explosion)
 
-            {3:0.25,9:0.5,27:1}
+            
             for frame_num,(speed,u,v) in {3:(0.25,16,0) , 3**2:(0.5,16,8), 3**4:(1,24,0)}.items(): #3**4:(1.5,px.COLOR_PURPLE)}
                 if px.frame_count % self.s*frame_num == 0:
                     self.enemis.append(Enemi(speed,u,v))
@@ -48,7 +48,7 @@ class App:
                 for tir in self.vaisseau.tirs:      
                     if collide(tir, enemi).happens:
                         try: self.enemis.remove(enemi)
-                        except ValueError: pass
+                        except ValueError: print("Error")
                         self.vaisseau.tirs.remove(tir)
                         self.score +=1
                         self.explosions.append(Explosion(enemi.x+enemi.w,enemi.y+enemi.h,12,6,px.COLOR_PURPLE))
