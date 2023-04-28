@@ -34,7 +34,7 @@ class App:
                     self.enemis.append(Enemi(speed,u,v))
 
             for enemi in self.enemis:
-                if collide(enemi, self.vaisseau):
+                if collide(enemi, self.vaisseau).happens:
                     self.vaisseau.vies-=1
                     self.enemis.remove(enemi)
                     self.explosions.append(Explosion(enemi.x+enemi.w/2,enemi.y+enemi.h/2,12,6,px.COLOR_PURPLE))
@@ -46,7 +46,7 @@ class App:
                     except ValueError: pass
                     self.passedAlert = 5
                 for tir in self.vaisseau.tirs:      
-                    if collide(tir, enemi):
+                    if collide(tir, enemi).happens:
                         try: self.enemis.remove(enemi)
                         except ValueError: pass
                         self.vaisseau.tirs.remove(tir)

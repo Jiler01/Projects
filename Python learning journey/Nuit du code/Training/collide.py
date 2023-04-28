@@ -12,7 +12,9 @@ def collide(obj1,obj2):
     x2_2 = obj2.x + obj2.w
     y2_2 = obj2.y + obj2.h
 
-    notX = x1_1 > x2_2 or x1_2 > x2_1
-    notY = y1_1 > y2_2 or y1_2 > y2_1
-
-    return not (notX or notY)
+    Collision.left = x1_1 < x2_2
+    Collision.right = x1_2 < x2_1
+    Collision.top = y1_1 < y2_2
+    Collision.bottom = y1_2 < y2_1
+    Collision.happends = Collision.left or Collision.right or Collision.top or Collision.bottom
+    return Collision
