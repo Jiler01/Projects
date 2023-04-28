@@ -8,7 +8,7 @@ class App:
     def __init__(self,fps=60,window_size:dict={"x":128 ,"y":128}):
         self.f = open("bestscore.dat","r")
         self.bestscore = int(self.f.readline())
-        self.vaisseau = Vaisseau(vies=3)
+        self.vaisseau = Vaisseau(vies=99999999999)
         self.enemis = []
         self.explosions = []
         self.score = 0
@@ -34,7 +34,7 @@ class App:
                     self.enemis.append(Enemi(speed,u,v))
 
             for enemi in self.enemis:
-                if collide(enemi, self.vaisseau).happens:
+                if collide(enemi, self.vaisseau,type="rectangle").happens:
                     self.vaisseau.vies-=1
                     self.enemis.remove(enemi)
                     self.explosions.append(Explosion(enemi.x+enemi.w/2,enemi.y+enemi.h/2,12,6,px.COLOR_PURPLE))
@@ -46,7 +46,7 @@ class App:
                     except ValueError: pass
                     self.passedAlert = 5
                 for tir in self.vaisseau.tirs:      
-                    if collide(tir, enemi).happens:
+                    if collide(tir,enemi,type="rectangle").happens:
                         try: self.enemis.remove(enemi)
                         except ValueError: print("Error")
                         self.vaisseau.tirs.remove(tir)

@@ -1,13 +1,64 @@
-def collide(rect1, rect2):
-    # Coordonnées des coins supérieur gauche et inférieur droit des rectangles
-    rect1_coords = (rect1.x, rect1.y, rect1.x + rect1.w, rect1.y + rect1.h)
-    rect2_coords = (rect2.x, rect2.y, rect2.x + rect2.w, rect2.y + rect2.h)
+class collide:
+    def __init__(self, obj1, obj2, type: str):
+        if type == "rectangle":
+            self.rectangle(obj1, obj2)
+        elif type == "circle":
+            self.circle(obj1, obj2)
 
-    # Vérification de la collision selon l'axe x
-    x_overlap = not (rect1_coords[2] < rect2_coords[0] or rect2_coords[2] < rect1_coords[0])
+    def rectangle(self, me, other_rect):
+        left = me.x
+        right = me.x + me.w
+        top = me.y
+        bottom = me.y + me.h
 
-    # Vérification de la collision selon l'axe y
-    y_overlap = not (rect1_coords[3] < rect2_coords[1] or rect2_coords[3] < rect1_coords[1])
+        other_left = other_rect.x
+        other_right = other_rect.x + other_rect.w
+        other_top = other_rect.y
+        other_bottom = other_rect.y + other_rect.h
 
-    # Si les deux conditions sont vraies, les rectangles se chevauchent
-    return x_overlap and y_overlap
+        overX = (left <= other_right) and (right >= other_left)
+        overY = (top <= other_bottom) and (bottom >= other_top)
+
+        if overX and overY:
+            if other_left < left:
+                Xposition = 'right'
+            elif other_right > right:
+                Xposition = 'left'
+            else:
+                Xposition = 'center'
+
+            if other_top < top:
+                Yposition = 'bottom'
+            elif other_bottom > bottom:
+                Yposition = 'top'
+            else:
+                Yposition = 'middle'
+
+            self.happens = True
+            self.Xposition = Xposition
+            self.Yposition = Yposition
+        else:
+            self.happens = False
+
+    def circle(self, me, other_circle):
+        distance = ((me.x - other_circle.x) ** 2 + (me.y - other_circle.y) ** 2) ** 0.5
+        if distance <= me.r + other_circle.r:
+            if me.x < other_circle.x:
+                Xposition = 'right'
+            elif me.x > other_circle.x:
+                Xposition = 'left'
+            else:
+                Xposition = 'center'
+
+            if me.y < other_circle.y:
+                Yposition = 'bottom'
+            elif me.y > other_circle.y:
+                Yposition = 'top'
+            else:
+                Yposition = 'middle'
+
+            self.happens = True
+            self.Xposition = Xposition
+            self.Yposition = Yposition
+        else:
+            self.happens = False
