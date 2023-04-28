@@ -16,5 +16,5 @@ def collide(obj1,obj2):
     Collision.right = x1_2 < x2_1
     Collision.top = y1_1 < y2_2
     Collision.bottom = y1_2 < y2_1
-    Collision.happends = Collision.left or Collision.right or Collision.top or Collision.bottom
+    Collision.happens = Collision.left or Collision.right or Collision.top or Collision.bottom
     return Collision
