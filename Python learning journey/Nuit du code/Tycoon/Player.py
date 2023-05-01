@@ -16,11 +16,11 @@ class Player:
 
         self.skins = {"0": {"left":(0,0),  "right":(8,0)},
                       "10":{"left":(0,8),  "right":(8,8)},
-                      "20":{"left":(16,8), "right":(16,8)}}
+                      "20":{"left":(0,16), "right":(8,16)}}
         self.eyeSide = "right"
 
-        self.xp = 0
-        self.__lastxp = 250
+        self.xp = 0        
+        self.__lastxp = 125
         self.level = 0
 
         self.flags = {"levelup":0}
