@@ -1,6 +1,6 @@
 import os,json
 
-class Data:
+class DATA:
     def __init__(self,name,*,default:dict={}):
         """
         name: the name of the file (will be stored under DATA folder) (without any extension)
