@@ -20,7 +20,7 @@ class Data:
         json.dump(value, open(self.path , "w"), indent=4, sort_keys=True)
         self.update()
 
-    def commit(self):
+    def push(self):
         self.overwrite(self.value)
 
     def delete(self,*,path=None):
