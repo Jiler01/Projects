@@ -68,4 +68,4 @@ class Player:
             return False
         
     def save(self):
-        self.wallet.commit()
+        self.wallet.push()
