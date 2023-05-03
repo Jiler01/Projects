@@ -23,9 +23,5 @@ class DATA:
     def push(self):
         self.overwrite(self.value)
 
-    def delete(self,*,path=None):
-        """
-        for more security and to avoid accidental removes, please fill the path argument with the file's full path
-        """
-        if path == self.path:
-            os.remove(self.path)
+    def delete(self):
+        os.remove(self.path)
