@@ -1,6 +1,6 @@
 import os,json
 
-class Data:
+class DATA:
     def __init__(self,name,*,default:dict={}):
         """
         name: the name of the file (will be stored under DATA folder) (without any extension)
@@ -20,7 +20,7 @@ class Data:
         json.dump(value, open(self.path , "w"), indent=4, sort_keys=True)
         self.update()
 
-    def commit(self):
+    def push(self):
         self.overwrite(self.value)
 
     def delete(self,*,path=None):

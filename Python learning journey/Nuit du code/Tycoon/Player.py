@@ -1,5 +1,5 @@
 import pyxel as px
-from MyTools import Data
+from MyTools import DATA
 import os
 
 class Player:
@@ -12,7 +12,7 @@ class Player:
         self.w = 8
         self.h = 8
 
-        self.wallet = Data("Player.wallet",default={"gallions":0,"noises":0,"mornilles":0})
+        self.wallet = DATA("Player.wallet",default={"gallions":0,"noises":0,"mornilles":0})
 
         self.skins = {"0": {"left":(0,0),  "right":(8,0)},
                       "10":{"left":(0,8),  "right":(8,8)},
@@ -68,4 +68,4 @@ class Player:
             return False
         
     def save(self):
-        self.wallet.commit()
+        self.wallet.push()
