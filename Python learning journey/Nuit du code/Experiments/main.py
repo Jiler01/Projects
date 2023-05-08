@@ -91,12 +91,20 @@ class Player(Entity):
     def handle_user_moves(self):
         if px.btnp(px.KEY_SPACE) and self.left_jumps > 0:
             self.left_jumps -= 1
-            return self.jump(1)
-        return self.jump(0)
+            return self.jump(True,40)
+        return self.jump(False)
 
-    def jump(self,new):
-        for jump in self.current_jumps:
+    def jump(self,new,height=0):
+        result = np.array([0,0])
+        height = -height
 
+        if new:
+            self.current_jumps.append(np.array([0,height]))
+        for i, _ in enumerate(self.current_jumps):
+            result = np.add(result,self.current_jumps[i]/5)
+            self.current_jumps[i][1] -= self.current_jumps[i][1]/5
+        
+        return result
 
 
     def update(self,game):
