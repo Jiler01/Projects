@@ -55,15 +55,18 @@ class Entity:
 
     def update_relatives(self):
         self.top = self.y
-        self.bottom = self.y+self.h
-        self.right = self.x
-        self.left = self.x + self.w
+        self.bottom = self.y + self.h
+        self.right = self.x + self.w
+        self.left = self.x
+
+    def overX(self,rect):
+        return rect.right >= self.left and rect.left <= self.right
+
+    def overY(self,rect):
+        return rect.top <= self.bottom and rect.bottom >= self.top
 
     def collide(self,rect):
-        over_y = rect.top <= self.bottom and rect.bottom >= self.top
-        over_x = rect.right <= self.left and rect.left >= self.right
-
-        return over_x and over_y
+        return self.overY(rect) and self.overX(rect)
     
 class Player(Entity):
     def __init__(self, x, y):
@@ -84,11 +87,14 @@ class Player(Entity):
             self.reset_gravity()
             self.reset_jump()
             return np.array([0,0])
-    
+
         self.gravity_token +=  game.GRAVITY
         return np.array([0,self.gravity_token])
 
-    def handle_user_moves(self):
+    def out_getter(self,rect,cases_to_reset_gravity:list(str),cases_to_reset_jump:list(str)):
+        
+
+    def handle_user_jumps(self):
         if px.btnp(px.KEY_SPACE) and self.left_jumps > 0:
             self.left_jumps -= 1
             return self.jump(True,40)
@@ -106,12 +112,17 @@ class Player(Entity):
         
         return result
 
-
     def update(self,game):
         self.update_relatives()
-        vector = np.add(self.handle_gravity(game),self.handle_user_moves())
+        vector = np.array([0,0])
+        for toadd in [self.handle_gravity(game),self.handle_user_jumps(),self.handle_user_moves(game)]: #
+            vector = np.add(vector,toadd)
+
+        #print(vector,self.x,self.y)
         self.x += vector[0]
         self.y += vector[1]
+
+        print(self.x,self.y)
 
     def draw(self):
         px.rect(self.x,self.y,self.w,self.h,px.COLOR_CYAN)
@@ -125,6 +136,7 @@ class Game:
 
         game.GRAVITY = 0.25
         game.floor = Entity(0,128,128,128)
+        game.walls = [Entity(30,120,8,8)]
         game.player = Player(64,64)
 
         px.run(game.update,game.draw)
@@ -136,5 +148,6 @@ class Game:
     def draw(game):
         px.cls(px.COLOR_BLACK)
         game.player.draw()
+        px.rect(30,120,8,8,px.COLOR_RED)
 
 Game()
