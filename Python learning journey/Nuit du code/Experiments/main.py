@@ -81,6 +81,9 @@ class Player(Entity):
     def reset_jump(self):
         self.left_jumps = 2
 
+    def out_getter(self,rect,cases_to_reset_gravity:list[str],cases_to_reset_jump:list[str]):
+        pass
+
     def handle_gravity(self,game):
         if self.collide(game.floor):
             self.set_bottom(game.floor.top)
@@ -90,9 +93,6 @@ class Player(Entity):
 
         self.gravity_token +=  game.GRAVITY
         return np.array([0,self.gravity_token])
-
-    def out_getter(self,rect,cases_to_reset_gravity:list(str),cases_to_reset_jump:list(str)):
-        
 
     def handle_user_jumps(self):
         if px.btnp(px.KEY_SPACE) and self.left_jumps > 0:
@@ -112,6 +112,14 @@ class Player(Entity):
         
         return result
 
+    def handle_user_moves(self,game):
+        result = np.array([0,0])
+        if px.btn(px.KEY_RIGHT):
+            result = np.add(result,np.array([2,0]))
+        if px.btn(px.KEY_LEFT):
+            result = np.add(result,np.array([-2,0]))
+        return result
+    
     def update(self,game):
         self.update_relatives()
         vector = np.array([0,0])
